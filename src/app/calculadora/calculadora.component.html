@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="calculator border p-3">
+    <input type="text" class="form-control mb-3" [(ngModel)]="display" readonly>
+    <div class="row">
+      <div class="col-3" *ngFor="let digit of digits">
+        <button class="btn btn-secondary btn-block mb-2 calculator-button" (click)="appendToDisplay(digit)">{{ digit }}</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <button class="btn btn-warning btn-block calculator-button" (click)="appendToDisplay('+')">+</button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-warning btn-block calculator-button" (click)="appendToDisplay('-')">-</button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-warning btn-block calculator-button" (click)="appendToDisplay('*')">*</button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-warning btn-block calculator-button" (click)="appendToDisplay('/')">/</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+
+        <button class="btn btn-primary btn-block calculator-button" (click)="calculate()">=</button>
+
+      </div>
+      <div class="col-3">
+        <button class="btn btn-danger btn-block calculator-button" (click)="clear()">C</button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-danger btn-block mb-2 calculator-button" (click)="deleteLastDigit()">D</button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-secondary btn-block mb-2 calculator-button" (click)="appendToDisplay('%')">%</button>
+      </div>
+    </div>
+  </div>
+</div>
