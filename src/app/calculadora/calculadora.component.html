@@ -22,9 +22,7 @@
     </div>
     <div class="row">
       <div class="col-3">
-
-        <button class="btn btn-primary btn-block calculator-button" (click)="calculate()">=</button>
-
+        <button class="btn btn-warning btn-block mb-2 calculator-button" (click)="calculatePercentage()">%</button>
       </div>
       <div class="col-3">
         <button class="btn btn-danger btn-block calculator-button" (click)="clear()">C</button>
@@ -33,7 +31,7 @@
         <button class="btn btn-danger btn-block mb-2 calculator-button" (click)="deleteLastDigit()">D</button>
       </div>
       <div class="col-3">
-        <button class="btn btn-secondary btn-block mb-2 calculator-button" (click)="appendToDisplay('%')">%</button>
+        <button class="btn btn-primary btn-block calculator-button" (click)="calculate()">=</button>
       </div>
     </div>
   </div>

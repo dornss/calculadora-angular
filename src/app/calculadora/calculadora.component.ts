@@ -8,7 +8,7 @@ import { CalculadoraService } from '../services/calculadora-service.service';
 })
 export class CalculadoraComponent {
   display: string = '';
-  digits: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+  digits: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
 
   constructor(private calculadoraService: CalculadoraService) {}
 
@@ -23,6 +23,9 @@ export class CalculadoraComponent {
   }
 
   appendToDisplay(value: string) {
+    if (value === '.' && this.display.includes('.')) {
+      return;
+    }
     this.display += value;
   }
 
@@ -33,10 +36,27 @@ export class CalculadoraComponent {
   }
 
   calculate() {
-    this.display = this.calculadoraService.calcularExpressao(this.display);
+    let result: string = this.calculadoraService.calcularExpressao(this.display);
+    this.display = parseFloat(result).toFixed(2);
   }
+
+
 
   clear() {
     this.display = '';
   }
+
+  calculatePercentage() {
+  if (this.display.includes('+') || this.display.includes('-') || this.display.includes('*') || this.display.includes('/')) {
+    try {
+      const expression = this.display.replace('%', '/100*');
+      this.display = eval(expression).toFixed(2);
+    } catch (error) {
+      this.display = 'Erro';
+    }
+  } else {
+    this.display = (parseFloat(this.display) / 100).toFixed(2);
+  }
+}
+
 }
