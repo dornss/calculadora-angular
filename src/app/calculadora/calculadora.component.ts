@@ -36,11 +36,13 @@ export class CalculadoraComponent {
   }
 
   calculate() {
-    let result: string = this.calculadoraService.calcularExpressao(this.display);
-    this.display = parseFloat(result).toFixed(2);
+    let result: number = parseFloat(this.calculadoraService.calcularExpressao(this.display));
+    if (Number.isInteger(result)) {
+      this.display = result.toString();
+    } else {
+      this.display = result.toFixed(2);
+    }
   }
-
-
 
   clear() {
     this.display = '';
