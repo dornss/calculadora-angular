@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalculadoraService } from '../services/calculadora-service.service';
 
 @Component({
   selector: 'app-calculadora',
@@ -7,22 +8,22 @@ import { Component } from '@angular/core';
 })
 export class CalculadoraComponent {
   display: string = '';
-  digits: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
+  digits: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
-  appendToDisplay(digit: string) {
-    this.display += digit;
-  }
+  constructor(private calculadoraService: CalculadoraService) {}
 
-  calculate() {
-    try {
-      this.display = eval(this.display);
-    } catch (error) {
-      this.display = 'Error';
+  onButtonClick(value: string) {
+    if (value === '=') {
+      this.calculate();
+    } else if (value === 'C') {
+      this.clear();
+    } else {
+      this.display += value;
     }
   }
 
-  clear() {
-    this.display = '';
+  appendToDisplay(value: string) {
+    this.display += value;
   }
 
   deleteLastDigit() {
@@ -31,13 +32,11 @@ export class CalculadoraComponent {
     }
   }
 
-  calculatePercentage() {
-    try {
-      const result = eval(this.display) / 100;
-      this.display = result.toString();
-    } catch (error) {
-      this.display = 'Error';
-    }
+  calculate() {
+    this.display = this.calculadoraService.calcularExpressao(this.display);
   }
 
+  clear() {
+    this.display = '';
+  }
 }
